@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jack_settings_ui/settings_ui.dart';
+import 'package:jack_settings_ui/src/tiles/abstract_settings_tile.dart';
+import 'package:jack_settings_ui/src/utils/settings_theme.dart';
 
 class WebSettingsSection extends StatelessWidget {
   const WebSettingsSection({

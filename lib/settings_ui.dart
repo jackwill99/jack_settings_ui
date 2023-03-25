@@ -1,4 +1,4 @@
-library jack_settings_ui;
+library settings_ui;
 
 export 'package:jack_settings_ui/src/list/settings_list.dart';
 export 'package:jack_settings_ui/src/sections/custom_settings_section.dart';

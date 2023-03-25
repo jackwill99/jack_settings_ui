@@ -12,12 +12,14 @@ class SettingsSection extends AbstractSettingsSection {
     required this.tiles,
     this.margin,
     this.title,
+    this.description,
     Key? key,
   }) : super(key: key);
 
   final List<AbstractSettingsTile> tiles;
   final EdgeInsetsDirectional? margin;
   final Widget? title;
+  final Widget? description;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class SettingsSection extends AbstractSettingsSection {
           title: title,
           tiles: tiles,
           margin: margin,
+          description: description,
         );
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:
@@ -39,6 +42,7 @@ class SettingsSection extends AbstractSettingsSection {
           title: title,
           tiles: tiles,
           margin: margin,
+          description: description,
         );
       case DevicePlatform.web:
         return WebSettingsSection(

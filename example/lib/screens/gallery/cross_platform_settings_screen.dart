@@ -1,4 +1,3 @@
-import 'package:example/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:jack_settings_ui/settings_ui.dart';
 
@@ -32,7 +31,7 @@ class _CrossPlatformSettingsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text('Cross Platform Settings'),
       ),
       body: SettingsList(
         platform: selectedPlatform,
@@ -63,70 +62,70 @@ class _CrossPlatformSettingsScreenState
                 trailingTextColor: Colors.orange,
               ),
         sections: [
-          SettingsSection(
-            title: Text('Common'),
-            tiles: <SettingsTile>[
-              SettingsTile.navigation(
-                leading: Icon(Icons.language),
-                title: Text('Language'),
-                value: Text('English'),
-              ),
-              SettingsTile.navigation(
-                leading: Icon(Icons.cloud_outlined),
-                title: Text('Environment'),
-                value: Text('Production'),
-              ),
-              SettingsTile.navigation(
-                leading: Icon(Icons.devices_other),
-                title: Text('Platform'),
-                onPressed: (context) async {
-                  final platform = await Navigation.navigateTo<DevicePlatform>(
-                    context: context,
-                    style: NavigationRouteStyle.material,
-                    screen: PlatformPickerScreen(
-                      platform: selectedPlatform,
-                      platforms: platformsMap,
-                    ),
-                  );
+          // SettingsSection(
+          //   title: Text('Common'),
+          //   tiles: <SettingsTile>[
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.language),
+          //       title: Text('Language'),
+          //       value: Text('English'),
+          //     ),
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.cloud_outlined),
+          //       title: Text('Environment'),
+          //       value: Text('Production'),
+          //     ),
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.devices_other),
+          //       title: Text('Platform'),
+          //       onPressed: (context) async {
+          //         final platform = await Navigation.navigateTo<DevicePlatform>(
+          //           context: context,
+          //           style: NavigationRouteStyle.material,
+          //           screen: PlatformPickerScreen(
+          //             platform: selectedPlatform,
+          //             platforms: platformsMap,
+          //           ),
+          //         );
 
-                  if (platform != null && platform is DevicePlatform) {
-                    setState(() {
-                      selectedPlatform = platform;
-                    });
-                  }
-                },
-                value: Text(platformsMap[selectedPlatform]),
-              ),
-              SettingsTile.switchTile(
-                onToggle: (value) {
-                  setState(() {
-                    useCustomTheme = value;
-                  });
-                },
-                initialValue: useCustomTheme,
-                leading: Icon(Icons.format_paint),
-                title: Text('Enable custom theme'),
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: Text('Account'),
-            tiles: <SettingsTile>[
-              SettingsTile.navigation(
-                leading: Icon(Icons.phone),
-                title: Text('Phone number'),
-              ),
-              SettingsTile.navigation(
-                leading: Icon(Icons.mail),
-                title: Text('Email'),
-                enabled: false,
-              ),
-              SettingsTile.navigation(
-                leading: Icon(Icons.logout),
-                title: Text('Sign out'),
-              ),
-            ],
-          ),
+          //         if (platform != null && platform is DevicePlatform) {
+          //           setState(() {
+          //             selectedPlatform = platform;
+          //           });
+          //         }
+          //       },
+          //       value: Text(platformsMap[selectedPlatform]),
+          //     ),
+          //     SettingsTile.switchTile(
+          //       onToggle: (value) {
+          //         setState(() {
+          //           useCustomTheme = value;
+          //         });
+          //       },
+          //       initialValue: useCustomTheme,
+          //       leading: Icon(Icons.format_paint),
+          //       title: Text('Enable custom theme'),
+          //     ),
+          //   ],
+          // ),
+          // SettingsSection(
+          //   title: Text('Account'),
+          //   tiles: <SettingsTile>[
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.phone),
+          //       title: Text('Phone number'),
+          //     ),
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.mail),
+          //       title: Text('Email'),
+          //       enabled: false,
+          //     ),
+          //     SettingsTile.navigation(
+          //       leading: Icon(Icons.logout),
+          //       title: Text('Sign out'),
+          //     ),
+          //   ],
+          // ),
           SettingsSection(
             title: Text('Security'),
             tiles: <SettingsTile>[
@@ -142,7 +141,7 @@ class _CrossPlatformSettingsScreenState
                 leading: Icon(Icons.fingerprint),
                 title: Text('Use fingerprint'),
                 description: Text(
-                  'Allow application to access stored fingerprint IDs',
+                  'Allow application to access stored fingerprint IDs to access stored fingerprint IDs',
                 ),
               ),
               SettingsTile.switchTile(
@@ -158,6 +157,9 @@ class _CrossPlatformSettingsScreenState
                 title: Text('Enable notifications'),
               ),
             ],
+            description: Text(
+              'Allow application to access stored fingerprint IDs to access stored fingerprint IDs',
+            ),
           ),
           SettingsSection(
             title: Text('Misc'),
@@ -171,6 +173,9 @@ class _CrossPlatformSettingsScreenState
                 title: Text('Open source license'),
               ),
             ],
+            description: Text(
+              'Allow application to access stored fingerprint IDs to access stored fingerprint IDs',
+            ),
           ),
         ],
       ),

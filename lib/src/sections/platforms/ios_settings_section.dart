@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jack_settings_ui/settings_ui.dart';
 import 'package:jack_settings_ui/src/tiles/platforms/ios_settings_tile.dart';
@@ -6,14 +5,16 @@ import 'package:jack_settings_ui/src/tiles/platforms/ios_settings_tile.dart';
 class IOSSettingsSection extends StatelessWidget {
   const IOSSettingsSection({
     required this.tiles,
-    required this.margin,
-    required this.title,
+    this.margin,
+    this.title,
+    this.description,
     Key? key,
   }) : super(key: key);
 
   final List<AbstractSettingsTile> tiles;
   final EdgeInsetsDirectional? margin;
   final Widget? title;
+  final Widget? description;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class IOSSettingsSection extends StatelessWidget {
       padding: margin ??
           EdgeInsets.only(
             top: 14.0 * scaleFactor,
-            bottom: isLastNonDescriptive ? 27 * scaleFactor : 10 * scaleFactor,
+            bottom: 10 * scaleFactor,
             left: 16,
             right: 16,
           ),
@@ -48,6 +49,11 @@ class IOSSettingsSection extends StatelessWidget {
               ),
             ),
           buildTileList(),
+          if (description != null)
+            buildDescription(
+                additionalInfo: IOSSettingsTileAdditionalInfo.of(context),
+                theme: SettingsTheme.of(context),
+                context: context),
         ],
       ),
     );
@@ -64,19 +70,13 @@ class IOSSettingsSection extends StatelessWidget {
 
         var enableTop = false;
 
-        if (index == 0 ||
-            (index > 0 &&
-                tiles[index - 1] is SettingsTile &&
-                (tiles[index - 1] as SettingsTile).description != null)) {
+        if (index == 0) {
           enableTop = true;
         }
 
         var enableBottom = false;
 
-        if (index == tiles.length - 1 ||
-            (index < tiles.length &&
-                tile is SettingsTile &&
-                (tile).description != null)) {
+        if (index == tiles.length - 1) {
           enableBottom = true;
         }
 
@@ -87,6 +87,34 @@ class IOSSettingsSection extends StatelessWidget {
           child: tile,
         );
       },
+    );
+  }
+
+  Widget buildDescription({
+    required BuildContext context,
+    required SettingsTheme theme,
+    required IOSSettingsTileAdditionalInfo additionalInfo,
+  }) {
+    final scaleFactor = MediaQuery.of(context).textScaleFactor;
+
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.only(
+        left: 18,
+        right: 18,
+        top: 8 * scaleFactor,
+        bottom: 8 * scaleFactor,
+      ),
+      decoration: BoxDecoration(
+        color: theme.themeData.settingsListBackground,
+      ),
+      child: DefaultTextStyle(
+        style: TextStyle(
+          color: theme.themeData.titleTextColor,
+          fontSize: 13,
+        ),
+        child: description!,
+      ),
     );
   }
 }

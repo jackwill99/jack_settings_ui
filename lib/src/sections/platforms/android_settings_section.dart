@@ -5,14 +5,16 @@ import 'package:jack_settings_ui/src/utils/settings_theme.dart';
 class AndroidSettingsSection extends StatelessWidget {
   const AndroidSettingsSection({
     required this.tiles,
-    required this.margin,
+    this.margin,
     this.title,
+    this.description,
     Key? key,
   }) : super(key: key);
 
   final List<AbstractSettingsTile> tiles;
   final EdgeInsetsDirectional? margin;
   final Widget? title;
+  final Widget? description;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,16 @@ class AndroidSettingsSection extends StatelessWidget {
           color: theme.themeData.settingsSectionBackground,
           child: tileList,
         ),
+        if (description != null)
+          Padding(
+            padding: EdgeInsetsDirectional.only(start: 24, end: 24),
+            child: DefaultTextStyle(
+              style: TextStyle(
+                color: theme.themeData.tileDescriptionTextColor,
+              ),
+              child: description!,
+            ),
+          ),
       ],
     );
   }

@@ -47,21 +47,26 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
 
     return IgnorePointer(
       ignoring: !widget.enabled,
-      child: Column(
-        children: [
-          buildTitle(
-            context: context,
-            theme: theme,
-            additionalInfo: additionalInfo,
-          ),
-          if (widget.description != null)
-            buildDescription(
-              context: context,
-              theme: theme,
-              additionalInfo: additionalInfo,
-            ),
-        ],
+      child: buildTitle(
+        context: context,
+        theme: theme,
+        additionalInfo: additionalInfo,
       ),
+      //  Column(
+      //   children: [
+      //     buildTitle(
+      //       context: context,
+      //       theme: theme,
+      //       additionalInfo: additionalInfo,
+      //     ),
+      //     // if (widget.description != null)
+      //     //   buildDescription(
+      //     //     context: context,
+      //     //     theme: theme,
+      //     //     additionalInfo: additionalInfo,
+      //     //   ),
+      //   ],
+      // ),
     );
   }
 
@@ -240,14 +245,28 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
                               top: 12.5 * scaleFactor,
                               bottom: 12.5 * scaleFactor,
                             ),
-                            child: DefaultTextStyle(
-                              style: TextStyle(
-                                color: widget.enabled
-                                    ? theme.themeData.settingsTileTextColor
-                                    : theme.themeData.inactiveTitleColor,
-                                fontSize: 16,
-                              ),
-                              child: widget.title!,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                DefaultTextStyle(
+                                  style: TextStyle(
+                                    color: widget.enabled
+                                        ? theme.themeData.settingsTileTextColor
+                                        : theme.themeData.inactiveTitleColor,
+                                    fontSize: 16,
+                                  ),
+                                  child: widget.title!,
+                                ),
+                                if (widget.description != null)
+                                  DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: theme.themeData.titleTextColor,
+                                      fontSize: 13,
+                                    ),
+                                    child: widget.description!,
+                                  )
+                              ],
                             ),
                           ),
                         ),
@@ -255,8 +274,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
                       ],
                     ),
                   ),
-                  if (widget.description == null &&
-                      additionalInfo.needToShowDivider)
+                  if (additionalInfo.needToShowDivider)
                     Divider(
                       height: 0,
                       thickness: 0.7,
