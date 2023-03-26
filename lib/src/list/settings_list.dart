@@ -25,6 +25,7 @@ class SettingsList extends StatelessWidget {
     required this.sections,
     this.shrinkWrap = false,
     this.physics,
+    this.controller,
     this.platform,
     this.lightTheme,
     this.darkTheme,
@@ -36,6 +37,7 @@ class SettingsList extends StatelessWidget {
 
   final bool shrinkWrap;
   final ScrollPhysics? physics;
+  final ScrollController? controller;
   final DevicePlatform? platform;
   final SettingsThemeData? lightTheme;
   final SettingsThemeData? darkTheme;
@@ -72,6 +74,7 @@ class SettingsList extends StatelessWidget {
           platform: platform,
           child: ListView.builder(
             physics: physics,
+            controller: controller,
             shrinkWrap: shrinkWrap,
             itemCount: sections.length,
             padding: contentPadding ?? calculateDefaultPadding(platform),
